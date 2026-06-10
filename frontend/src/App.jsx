@@ -15,9 +15,10 @@ function App() {
                 .map((edge) => edge.trim())
                 .filter((edge) => edge.length > 0);
 
-            await axios.post("https://sit-bajaj-api.onrender.com/api/graph", {
-                edges,
-            });
+            const res = await axios.post(
+                "https://sit-bajaj-api.onrender.com/api/graph",
+                { edges }
+            );
 
             setResponse(res.data);
         } catch (error) {
@@ -43,14 +44,20 @@ function App() {
             <br />
             <br />
 
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit}>
+                Submit
+            </button>
 
             <br />
             <br />
 
             {loading && <p>Loading...</p>}
 
-            {response && <pre>{JSON.stringify(response, null, 2)}</pre>}
+            {response && (
+                <pre>
+                    {JSON.stringify(response, null, 2)}
+                </pre>
+            )}
         </div>
     );
 }
